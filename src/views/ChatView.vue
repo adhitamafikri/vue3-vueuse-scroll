@@ -12,13 +12,8 @@
         <span>{{ item.lastMessageTime.toLocaleTimeString() }}</span>
       </button>
     </aside>
-    <Transition @enter="onChatThreadEnter">
-      <article
-        v-if="selectedChatId"
-        :key="`chat-thread-anim-${selectedChatId}`"
-        class="chat-thread"
-        ref="chat-thread"
-      >
+    <Transition mode="out-in" @enter="onChatThreadEnter">
+      <article v-if="selectedChatId" :key="selectedChatId" class="chat-thread" ref="chat-thread">
         <div v-for="message in getSelectedChatMessages()" :key="message.id" class="chat-bubble">
           <div class="chat-bubble__bubble" :class="getBubbleClass(message.sender)">
             <p>{{ message.content }}</p>
